@@ -5,7 +5,7 @@ LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 ENV NGINX_VERSION 1.15.12
 
 # https://github.com/chobits/ngx_http_proxy_connect_module下载的主分支包
-ADD ngx_http_proxy_connect_module.tar.gz /opt/
+RUN wget https://codeload.github.com/chobits/ngx_http_proxy_connect_module/tar.gz/v0.0.1 -O /opt/ngx_http_proxy_connect_module.tar.gz && cd /opt && tar -xzvf ngx_http_proxy_connect_module.tar.gz && mv /opt/ngx_http_proxy_connect_module-0.0.1/ /opt/ngx_http_proxy_connect_module && rm -f /opt/ngx_http_proxy_connect_module.tar.gz
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& CONFIG="\
