@@ -16,5 +16,5 @@ docker run -p 80:80 -d forward-proxy-via-nginx:v1.0.0
 
 在其他机器上测试：
 ```shell
-curl --proxy 116.63.90.103:80 http://www.baidu.com/s\?wd\=ip 2>/dev/null | grep 本机IP:
+curl --proxy $your_vm_ip http://www.baidu.com/s\?wd\=ip 2>/dev/null | grep 本机IP:
 ```
