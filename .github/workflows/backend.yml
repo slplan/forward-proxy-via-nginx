@@ -26,4 +26,4 @@ jobs:
         snapshot: true
 
     - name: 触发 Portainer webhook
-      run: curl -X POST xx
+      run: curl -X POST http://120.78.210.72:9000/api/webhooks/9b512ad6-dd92-4ad7-8441-c45ed39281c3
