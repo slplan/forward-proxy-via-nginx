@@ -1,0 +1,23 @@
+version: '3.6'
+services:
+  forward-proxy-via-nginx:
+    image: registry.cn-shanghai.aliyuncs.com/slplan/forward-proxy-via-nginx:latest
+    ports:
+      - 5000:80
+    networks:
+      - slplan
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  slplan:
+    driver: overlay
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.88.0.0/16

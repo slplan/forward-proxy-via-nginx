@@ -1,0 +1,29 @@
+name: 部署小程序代理设置
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: 部署
+    env:
+      PROJECT_NAME: forward-proxy-via-nginx
+      VERSION: 0.1.0
+    runs-on: ubuntu-latest
+    steps:
+    - name: 更新代码
+      uses: actions/checkout@master
+
+    - name: 构建 Docker 发布阿里云私有仓库
+      uses: elgohr/Publish-Docker-Github-Action@7914449485a6df19c162bd4949b2345e5f595a8b
+      with:
+        name: slplan/${{ env.PROJECT_NAME }}
+        username: ${{ secrets.ALI_DOCKER_USERNAME }}
+        password: ${{ secrets.ALI_DOCKER_PASSWORD }}
+        registry: registry.cn-shanghai.aliyuncs.com
+        dockerfile: ./Dockerfile
+        tags: "latest,${{ env.VERSION }}"
+        snapshot: true
+
+    - name: 触发 Portainer webhook
+      run: curl -X POST xx
